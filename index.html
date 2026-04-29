@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Banda Ki Seva · Modern Register</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    /* modern gradient background with animated shift */
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    /* animated grain / noise effect (subtle) */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* glassmorphic container */
+    .glass-card {
+      background: rgba(15, 25, 35, 0.65);
+      backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid rgba(0, 255, 255, 0.25);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(0, 255, 255, 0.1) inset;
+      width: 100%;
+      max-width: 480px;
+      padding: 1.8rem 2rem 2.2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 255, 200, 0.5);
+      box-shadow: 0 30px 50px -20px rgba(0, 200, 255, 0.2);
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #c1ffff, #4ef5ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sub {
+      font-size: 0.8rem;
+      color: #9aaebf;
+      border-left: 2px solid #2bd5e8;
+      padding-left: 0.75rem;
+      margin-bottom: 1.8rem;
+      font-weight: 400;
+    }
+
+    /* input group modern */
+    .input-group {
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      color: #a0f0ff;
+      margin-bottom: 0.4rem;
+    }
+
+    .input-field {
+      width: 100%;
+      background: rgba(0, 10, 20, 0.6);
+      border: 1px solid rgba(72, 187, 200, 0.5);
+      border-radius: 1.2rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: white;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-field:focus {
+      border-color: #2dd4bf;
+      background: rgba(0, 20, 30, 0.8);
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+    }
+
+    .input-field::placeholder {
+      color: #9cb3c9;
+      font-weight: 400;
+      font-size: 0.85rem;
+    }
+
+    /* double row (name row optional) */
+    .row-2col {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .row-2col .input-group {
+      flex: 1;
+    }
+
+    button {
+      background: linear-gradient(105deg, #06b6d4, #3b82f6);
+      border: none;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 5px 12px rgba(0, 150, 200, 0.2);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(105deg, #0891b2, #2563eb);
+      box-shadow: 0 12px 20px -8px rgba(6, 182, 212, 0.4);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .otp-section {
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      margin-top: 0.8rem;
+      padding-top: 0.5rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .otp-flex {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .otp-flex .input-field {
+      flex: 2;
+    }
+
+    .otp-flex button {
+      flex: 1;
+      margin-top: 0;
+      background: #1e293b;
+      box-shadow: none;
+    }
+
+    .otp-flex button:hover {
+      background: #2d3a4e;
+      transform: none;
+    }
+
+    .info-badge {
+      background: rgba(0, 255, 200, 0.08);
+      border-radius: 1rem;
+      padding: 0.6rem 1rem;
+      font-size: 0.7rem;
+      text-align: center;
+      margin-top: 1.2rem;
+      color: #b0e5ff;
+      border: 0.5px solid rgba(0, 255, 230, 0.3);
+    }
+
+    .error-shake {
+      animation: shake 0.3s ease-in-out 0s 2;
+      border-color: #ff5e7c !important;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    .success-toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: #0f2a1f;
+      backdrop-filter: blur(12px);
+      border-left: 5px solid #2dd4bf;
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      color: #ccfff0;
+      font-weight: 500;
+      font-size: 0.85rem;
+      z-index: 1000;
+      transition: all 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    }
+
+    .toast-show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    @media (max-width: 480px) {
+      .glass-card {
+        padding: 1.5rem;
+      }
+      .row-2col {
+        flex-direction: column;
+        gap: 0;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* password strength indicator */
+    .strength {
+      font-size: 0.65rem;
+      margin-top: 4px;
+      margin-left: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .strength span {
+      padding: 2px 6px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-card">
+  <h2>✦ BANDA KI SEVA <span style="font-size: 1.4rem;">🇮🇳</span></h2>
+  <div class="sub">Create your account — सुरक्षित & आधुनिक</div>
+
+  <!-- full name -->
+  <div class="input-group">
+    <label>Full Name</label>
+    <input type="text" id="fullName" class="input-field" placeholder="e.g. Rohan Sharma / रोहन शर्मा" autocomplete="name">
+  </div>
+
+  <!-- mobile + whatsapp inline for modern compactness -->
+  <div class="row-2col">
+    <div class="input-group">
+      <label>📱 Mobile</label>
+      <input type="tel" id="mobile" class="input-field" placeholder="10 digits" maxlength="10" inputmode="numeric">
+    </div>
+    <div class="input-group">
+      <label>💬 WhatsApp</label>
+      <input type="tel" id="whatsapp" class="input-field" placeholder="Same or different" maxlength="10" inputmode="numeric">
+    </div>
+  </div>
+
+  <!-- Aadhaar + password row? but better separate for clarity -->
+  <div class="input-group">
+    <label>🆔 Aadhaar Number</label>
+    <input type="text" id="aadhaar" class="input-field" placeholder="12-digit unique ID" maxlength="12" inputmode="numeric">
+  </div>
+
+  <div class="row-2col">
+    <div class="input-group">
+      <label>🔒 Password</label>
+      <input type="password" id="password" class="input-field" placeholder="Min. 6 characters">
+      <div class="strength" id="passStrength"></div>
+    </div>
+    <div class="input-group">
+      <label>✓ Confirm Password</label>
+      <input type="password" id="confirmPwd" class="input-field" placeholder="Retype password">
+    </div>
+  </div>
+
+  <!-- primary action: send OTP -->
+  <button id="sendOtpBtn">📨 Send Verification OTP</button>
+
+  <!-- OTP Section (hidden initially) -->
+  <div id="otpContainer" class="otp-section hidden">
+    <div class="input-group">
+      <label>✉️ Enter OTP (6-digit demo)</label>
+      <div class="otp-flex">
+        <input type="text" id="otpInput" class="input-field" placeholder="6-digit code" maxlength="6" inputmode="numeric">
+        <button id="verifyOtpBtn">Verify ✓</button>
+      </div>
+    </div>
+    <div class="info-badge" id="otpHintMsg">
+      💡 OTP will be shown as toast / alert in demo mode.
+    </div>
+  </div>
+
+  <div class="info-badge" style="margin-top: 1rem;">
+    🔐 Already registered? <a href="login.html" style="color:#2dd4bf; text-decoration: none;">Login here →</a>
+  </div>
+</div>
+
+<div id="toastMsg" class="success-toast">✨ Registration success</div>
+
+<script>
+  (function() {
+    // DOM elements
+    const fullName = document.getElementById('fullName');
+    const mobileInp = document.getElementById('mobile');
+    const whatsappInp = document.getElementById('whatsapp');
+    const aadhaarInp = document.getElementById('aadhaar');
+    const passwordInp = document.getElementById('password');
+    const confirmInp = document.getElementById('confirmPwd');
+    const sendBtn = document.getElementById('sendOtpBtn');
+    const otpContainer = document.getElementById('otpContainer');
+    const otpInput = document.getElementById('otpInput');
+    const verifyBtn = document.getElementById('verifyOtpBtn');
+    const strengthDiv = document.getElementById('passStrength');
+    const toastEl = document.getElementById('toastMsg');
+
+    // internal state
+    let generatedOtp = null;        // stores OTP as string (6 digits)
+    let pendingUserData = null;      // temporary object before OTP verification
+
+    // Helper: show toast message
+    function showToast(message, isError = false) {
+      toastEl.textContent = message;
+      toastEl.style.background = isError ? '#3b1e2a' : '#0f2f2a';
+      toastEl.style.borderLeftColor = isError ? '#ff7b89' : '#2dd4bf';
+      toastEl.classList.add('toast-show');
+      setTimeout(() => {
+        toastEl.classList.remove('toast-show');
+      }, 2800);
+    }
+
+    // show inline temporary alert but nicer
+    function triggerFieldError(field, message) {
+      showToast(message, true);
+      field.classList.add('error-shake');
+      setTimeout(() => field.classList.remove('error-shake'), 500);
+    }
+
+    // password strength indicator (simple)
+    function updateStrength() {
+      const pwd = passwordInp.value;
+      if (!pwd) {
+        strengthDiv.innerHTML = '';
+        return;
+      }
+      let strength = 0;
+      if (pwd.length >= 6) strength++;
+      if (pwd.length >= 8) strength++;
+      if (/[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) strength++;
+      if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+      let msg = '';
+      let color = '#ffaa66';
+      if (strength <= 1) msg = 'Weak';
+      else if (strength === 2) msg = 'Fair';
+      else if (strength === 3) msg = 'Good';
+      else msg = 'Strong';
+      if (strength >= 3) color = '#4ef5b0';
+      if (strength <= 1) color = '#ff8a7a';
+      strengthDiv.innerHTML = `<span style="background:${color}20; color:${color};">🔐 ${msg}</span>`;
+    }
+
+    passwordInp.addEventListener('input', updateStrength);
+    confirmInp.addEventListener('input', updateStrength);
+
+    // basic validation before sending OTP
+    function validateBasicFields() {
+      const name = fullName.value.trim();
+      if (name.length < 2) {
+        triggerFieldError(fullName, '❌ Please enter your full name');
+        return false;
+      }
+      const mobile = mobileInp.value.trim();
+      if (!/^\d{10}$/.test(mobile)) {
+        triggerFieldError(mobileInp, '📞 Mobile must be exactly 10 digits');
+        return false;
+      }
+      let whatsapp = whatsappInp.value.trim();
+      if (whatsapp === "") whatsapp = mobile;
+      else if (!/^\d{10}$/.test(whatsapp)) {
+        triggerFieldError(whatsappInp, '💬 WhatsApp number must be 10 digits');
+        return false;
+      }
+      const aadhaar = aadhaarInp.value.trim();
+      if (!/^\d{12}$/.test(aadhaar)) {
+        triggerFieldError(aadhaarInp, '🆔 Aadhaar must be exactly 12 digits');
+        return false;
+      }
+      const pwd = passwordInp.value;
+      if (pwd.length < 6) {
+        triggerFieldError(passwordInp, '🔒 Password must be at least 6 characters');
+        return false;
+      }
+      if (pwd !== confirmInp.value) {
+        triggerFieldError(confirmInp, '⚠️ Passwords do not match');
+        return false;
+      }
+      return { name, mobile, whatsapp: whatsapp === "" ? mobile : whatsapp, aadhaar, password: pwd };
+    }
+
+    // generate modern 6-digit OTP
+    function generateSecureOTP() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    // simulate OTP send (modern toast + no alert)
+    function sendOTPFlow() {
+      const validation = validateBasicFields();
+      if (!validation) return false;
+
+      // store user data temporarily (without saving to localStorage yet)
+      pendingUserData = {
+        name: validation.name,
+        mobile: validation.mobile,
+        whatsapp: validation.whatsapp,
+        aadhaar: validation.aadhaar,
+        password: validation.password
+      };
+
+      // generate new OTP
+      generatedOtp = generateSecureOTP();
+      
+      // show OTP section with smooth reveal
+      otpContainer.classList.remove('hidden');
+      
+      // modern demo: Show OTP via toast and also console friendly
+      showToast(`📨 DEMO OTP: ${generatedOtp}  (valid for this session)`, false);
+      
+      // update hint badge to show that OTP is sent
+      const hintMsg = document.getElementById('otpHintMsg');
+      if (hintMsg) hintMsg.innerHTML = `🔐 6-digit OTP sent to ${validation.mobile} (demo mode: ${generatedOtp})`;
+      
+      // auto-focus OTP field
+      otpInput.value = '';
+      otpInput.focus();
+      
+      // small additional animation
+      return true;
+    }
+
+    // Verify OTP and final register
+    function finalizeRegistration() {
+      if (!generatedOtp) {
+        showToast('❌ No OTP request found. Please click "Send OTP" first.', true);
+        return;
+      }
+      const enteredOtp = otpInput.value.trim();
+      if (!/^\d{6}$/.test(enteredOtp)) {
+        triggerFieldError(otpInput, '🔢 Please enter valid 6-digit OTP');
+        return;
+      }
+      if (enteredOtp !== generatedOtp) {
+        triggerFieldError(otpInput, '❌ Incorrect OTP. Please try again.');
+        return;
+      }
+      if (!pendingUserData) {
+        showToast('Session expired, resend OTP.', true);
+        return;
+      }
+
+      // duplicate check: if mobile already registered
+      const existingKey = `user_${pendingUserData.mobile}`;
+      if (localStorage.getItem(existingKey)) {
+        showToast('⚠️ Mobile number already registered! Try login.', true);
+        return;
+      }
+
+      // save user object to localStorage
+      const finalUser = {
+        name: pendingUserData.name,
+        mobile: pendingUserData.mobile,
+        whatsapp: pendingUserData.whatsapp,
+        aadhaar: pendingUserData.aadhaar,
+        password: pendingUserData.password,
+        registeredAt: new Date().toISOString()
+      };
+      
+      localStorage.setItem(existingKey, JSON.stringify(finalUser));
+      
+      // Success toast & redirect
+      showToast(`🎉 Welcome ${finalUser.name}! Redirecting to login...`, false);
+      
+      // slight delay before redirection
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    }
+
+    // Resend OTP functionality (optional but convenient)
+    function resendOtpHandler() {
+      if (!pendingUserData) {
+        // if user never filled the data or OTP section manually visible but no pending data -> recall sendOTP
+        const validation = validateBasicFields();
+        if (!validation) return;
+        pendingUserData = {
+          name: validation.name,
+          mobile: validation.mobile,
+          whatsapp: validation.whatsapp,
+          aadhaar: validation.aadhaar,
+          password: validation.password
+        };
+      }
+      generatedOtp = generateSecureOTP();
+      showToast(`🔄 New OTP: ${generatedOtp}`, false);
+      const hintMsg = document.getElementById('otpHintMsg');
+      if (hintMsg) hintMsg.innerHTML = `✨ Resent OTP: ${generatedOtp} (enter below)`;
+      otpInput.value = '';
+      otpInput.focus();
+    }
+
+    // attach event listeners with modern interactions
+    sendBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      sendOTPFlow();
+    });
+
+    verifyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      finalizeRegistration();
+    });
+    
+    // Add a small "resend" link inside OTP box for better UX
+    const existingBadge = document.getElementById('otpHintMsg');
+    if (existingBadge && !document.getElementById('resendLink')) {
+      const resendSpan = document.createElement('span');
+      resendSpan.id = 'resendLink';
+      resendSpan.style.cssText = 'color:#4ef5ff; cursor:pointer; margin-left: 12px; font-weight:500; text-decoration:underline;';
+      resendSpan.textContent = 'Resend OTP';
+      resendSpan.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!pendingUserData && fullName.value.trim() === "") {
+          showToast("Please fill details before resending OTP", true);
+          return;
+        }
+        if (!pendingUserData) {
+          const validation = validateBasicFields();
+          if (!validation) return;
+          pendingUserData = {
+            name: validation.name,
+            mobile: validation.mobile,
+            whatsapp: validation.whatsapp,
+            aadhaar: validation.aadhaar,
+            password: validation.password
+          };
+        }
+        resendOtpHandler();
+      });
+      existingBadge.appendChild(document.createElement('br'));
+      existingBadge.appendChild(resendSpan);
+    }
+    
+    // auto-format Aadhaar spacing? Not required, but improves readability while keeping numeric
+    aadhaarInp.addEventListener('input', function(e) {
+      let val = this.value.replace(/\D/g, '');
+      if (val.length > 12) val = val.slice(0,12);
+      this.value = val;
+    });
+    
+    mobileInp.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0,10);
+    });
+    whatsappInp.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0,10);
+    });
+    otpInput.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0,6);
+    });
+    
+    // additional policy: if mobile is empty but whatsapp filled, maybe sync? not needed, just modern
+    // password toggle eye? (optional simplicity)
+    // add floating effect on input focus
+    const allInputs = document.querySelectorAll('.input-field');
+    allInputs.forEach(inp => {
+      inp.addEventListener('focus', () => {
+        inp.parentElement?.querySelector('label')?.style.setProperty('color', '#2dd4bf');
+      });
+      inp.addEventListener('blur', () => {
+        inp.parentElement?.querySelector('label')?.style.setProperty('color', '#a0f0ff');
+      });
+    });
+    
+    // clear OTP box if user starts editing primary fields (to avoid confusion)
+    function resetOtpContext() {
+      if (!otpContainer.classList.contains('hidden')) {
+        // optional: but we only hide if new sendOTP will generate new context
+        // better to keep but we reset the pending OTP state only on new send
+        generatedOtp = null;
+        pendingUserData = null;
+        otpContainer.classList.add('hidden');
+      }
+    }
+    fullName.addEventListener('input', resetOtpContext);
+    mobileInp.addEventListener('input', resetOtpContext);
+    aadhaarInp.addEventListener('input', resetOtpContext);
+    passwordInp.addEventListener('input', resetOtpContext);
+    
+    // additionally, if user clicks send after changes, it regenerates everything 
+    // good.
+    console.log("✨ Modern registration UI ready — Banda Ki Seva");
+  })();
+</script>
+</body>
+  </html>
