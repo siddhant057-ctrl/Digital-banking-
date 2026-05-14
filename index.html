@@ -3,27 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Banda Ki Seva · Modern Register</title>
+  <title>💰 MAONY PANEL · HACKING STYLE</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      font-family: 'Share Tech Mono', 'Fira Code', 'Courier New', monospace;
     }
 
-    /* modern gradient background with animated shift */
+    /* cyberpunk / hacking core — animated matrix rain influence */
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at 20% 30%, #0a0f1e, #03060c);
+      background: radial-gradient(circle at 30% 10%, #021007, #000000);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* animated grain / noise effect (subtle) */
+    /* glitchy scanlines + flicker */
     body::before {
       content: "";
       position: fixed;
@@ -31,604 +32,638 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.03) 0px, rgba(0, 255, 0, 0.03) 2px, transparent 2px, transparent 6px);
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
+      animation: scanMove 12s linear infinite;
     }
 
-    /* glassmorphic container */
-    .glass-card {
-      background: rgba(15, 25, 35, 0.65);
-      backdrop-filter: blur(14px);
-      border-radius: 2rem;
-      border: 1px solid rgba(0, 255, 255, 0.25);
-      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(0, 255, 255, 0.1) inset;
+    @keyframes scanMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 20px; }
+    }
+
+    /* glitch overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      max-width: 480px;
-      padding: 1.8rem 2rem 2.2rem;
-      transition: all 0.3s ease;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(0,255,0,0.08), transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* === MAIN TERMINAL PANEL === */
+    .hacking-terminal {
+      background: #0a0f0ad9;
+      backdrop-filter: blur(16px);
+      border: 2px solid #2effb0;
+      border-radius: 1.2rem;
+      width: 100%;
+      max-width: 560px;
+      padding: 1.8rem 2rem 2rem;
+      box-shadow: 0 0 18px rgba(0, 255, 100, 0.3), inset 0 0 12px rgba(0, 255, 150, 0.1);
       position: relative;
-      z-index: 2;
+      z-index: 10;
+      transition: 0.2s;
+      animation: terminalGlow 3s infinite alternate;
     }
 
-    .glass-card:hover {
-      border-color: rgba(0, 255, 200, 0.5);
-      box-shadow: 0 30px 50px -20px rgba(0, 200, 255, 0.2);
+    @keyframes terminalGlow {
+      0% { border-color: #2effb0; box-shadow: 0 0 10px rgba(46,255,176,0.3);}
+      100% { border-color: #00ffcc; box-shadow: 0 0 25px rgba(0,255,200,0.7);}
     }
 
-    h2 {
-      font-size: 1.9rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #c1ffff, #4ef5ff);
+    /* header cash style */
+    .cash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px dashed #2aff9e;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.7rem;
+      flex-wrap: wrap;
+    }
+    .cash-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e5ff00, #0effa0);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.3px;
+      letter-spacing: 3px;
+      text-shadow: 0 0 5px #00ff77;
+      font-family: monospace;
+    }
+    .badge-hack {
+      background: #000000aa;
+      border: 1px solid #3eff9e;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #aaffcc;
+      letter-spacing: 1px;
+    }
+
+    /* ===== HACKING STYLE INPUTS ===== */
+    .hack-field {
+      margin-bottom: 1.3rem;
+      text-align: left;
+    }
+    .hack-field label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #a0ffb0;
+      letter-spacing: 1.5px;
       margin-bottom: 0.5rem;
+      font-weight: bold;
+      text-shadow: 0 0 2px #0f0;
+    }
+    .hack-input {
+      width: 100%;
+      background: #010a02;
+      border: 1px solid #2effa0;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      font-family: monospace;
+      color: #c0ffd0;
+      outline: none;
+      transition: all 0.15s;
+      box-shadow: inset 0 0 5px rgba(0,255,0,0.2);
+    }
+    .hack-input:focus {
+      border-color: #f0ff70;
+      box-shadow: 0 0 8px #2eff9e, inset 0 0 4px #aaffaa;
+      background: #021c05;
+      color: #ffffff;
+    }
+    .hack-input::placeholder {
+      color: #3b7c55;
+      font-style: italic;
+    }
+
+    /* live location block — elite style */
+    .location-panel {
+      background: #031007cc;
+      border: 1px solid #47ff9e;
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+      margin: 1.2rem 0 1rem;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s;
+    }
+    .loc-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-
-    .sub {
-      font-size: 0.8rem;
-      color: #9aaebf;
-      border-left: 2px solid #2bd5e8;
-      padding-left: 0.75rem;
-      margin-bottom: 1.8rem;
-      font-weight: 400;
-    }
-
-    /* input group modern */
-    .input-group {
-      margin-bottom: 1.25rem;
-      text-align: left;
-    }
-
-    .input-group label {
-      display: block;
+    .loc-header span {
+      font-weight: bold;
+      color: #aaffcc;
       font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 500;
-      color: #a0f0ff;
-      margin-bottom: 0.4rem;
+      background: #00000066;
+      padding: 2px 8px;
+      border-radius: 30px;
+    }
+    .glitch-btn {
+      background: #000000;
+      border: 1px solid #2effb0;
+      color: #00ffaa;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.1s linear;
+      font-family: monospace;
+    }
+    .glitch-btn:hover {
+      background: #2effb033;
+      box-shadow: 0 0 6px #2effa0;
+      text-shadow: 0 0 2px #0f0;
+      transform: scale(0.98);
+    }
+    .loc-data {
+      font-family: monospace;
+      font-size: 0.7rem;
+      background: #021a07;
+      padding: 8px;
+      border-radius: 10px;
+      margin-top: 8px;
+      word-break: break-all;
+      color: #94ffb0;
+      border-left: 3px solid #0eff80;
     }
 
-    .input-field {
-      width: 100%;
-      background: rgba(0, 10, 20, 0.6);
-      border: 1px solid rgba(72, 187, 200, 0.5);
-      border-radius: 1.2rem;
-      padding: 0.85rem 1rem;
-      font-size: 0.95rem;
-      color: white;
-      outline: none;
-      transition: all 0.2s;
-    }
-
-    .input-field:focus {
-      border-color: #2dd4bf;
-      background: rgba(0, 20, 30, 0.8);
-      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
-    }
-
-    .input-field::placeholder {
-      color: #9cb3c9;
-      font-weight: 400;
-      font-size: 0.85rem;
-    }
-
-    /* double row (name row optional) */
-    .row-2col {
+    /* hacker-style name fields with typing effect */
+    .hacker-name-row {
       display: flex;
-      gap: 1rem;
+      gap: 14px;
+      margin-bottom: 1rem;
     }
-
-    .row-2col .input-group {
+    .hacker-name-row .hack-field {
       flex: 1;
     }
 
-    button {
-      background: linear-gradient(105deg, #06b6d4, #3b82f6);
-      border: none;
+    /* buttons */
+    .hack-primary-btn {
       width: 100%;
-      padding: 0.85rem;
-      border-radius: 2rem;
-      font-weight: 700;
+      background: linear-gradient(90deg, #0e2b1a, #051f0c);
+      border: 1.5px solid #25ffa0;
+      padding: 0.9rem;
+      font-weight: bold;
+      color: #aaffcc;
+      font-family: monospace;
+      letter-spacing: 2px;
       font-size: 1rem;
-      color: white;
+      border-radius: 40px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: 0.2s;
       margin-top: 0.5rem;
-      letter-spacing: 0.3px;
-      box-shadow: 0 5px 12px rgba(0, 150, 200, 0.2);
+      text-transform: uppercase;
     }
-
-    button:hover {
-      transform: translateY(-2px);
-      background: linear-gradient(105deg, #0891b2, #2563eb);
-      box-shadow: 0 12px 20px -8px rgba(6, 182, 212, 0.4);
+    .hack-primary-btn:hover {
+      background: #0b3c1f;
+      border-color: #f5ff88;
+      color: #e0ffc0;
+      box-shadow: 0 0 12px #1eff8f;
     }
-
-    button:active {
-      transform: translateY(1px);
+    .otp-gizmo {
+      margin-top: 1.2rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed #2effb0;
     }
-
-    .otp-section {
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      margin-top: 0.8rem;
-      padding-top: 0.5rem;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .otp-flex {
+    .flex-otp {
       display: flex;
       gap: 10px;
       align-items: center;
     }
-
-    .otp-flex .input-field {
+    .flex-otp .hack-input {
       flex: 2;
     }
-
-    .otp-flex button {
-      flex: 1;
-      margin-top: 0;
-      background: #1e293b;
-      box-shadow: none;
+    .hidden {
+      display: none;
     }
 
-    .otp-flex button:hover {
-      background: #2d3a4e;
-      transform: none;
-    }
-
-    .info-badge {
-      background: rgba(0, 255, 200, 0.08);
-      border-radius: 1rem;
-      padding: 0.6rem 1rem;
-      font-size: 0.7rem;
-      text-align: center;
-      margin-top: 1.2rem;
-      color: #b0e5ff;
-      border: 0.5px solid rgba(0, 255, 230, 0.3);
-    }
-
-    .error-shake {
-      animation: shake 0.3s ease-in-out 0s 2;
-      border-color: #ff5e7c !important;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      75% { transform: translateX(4px); }
-    }
-
-    .success-toast {
+    /* toast hacking notifications */
+    .hack-toast {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%) scale(0.9);
-      background: #0f2a1f;
+      background: #021f0b;
+      border: 1px solid #50ffa0;
       backdrop-filter: blur(12px);
-      border-left: 5px solid #2dd4bf;
-      padding: 0.7rem 1.6rem;
-      border-radius: 60px;
-      color: #ccfff0;
-      font-weight: 500;
-      font-size: 0.85rem;
-      z-index: 1000;
-      transition: all 0.2s;
+      color: #b0ffc0;
+      padding: 0.7rem 1.5rem;
+      font-family: monospace;
+      font-size: 0.8rem;
+      border-radius: 40px;
+      z-index: 999;
       opacity: 0;
+      transition: 0.15s;
       pointer-events: none;
       white-space: nowrap;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
     }
-
-    .toast-show {
+    .toast-active {
       opacity: 1;
       transform: translateX(-50%) scale(1);
     }
-
-    @media (max-width: 480px) {
-      .glass-card {
-        padding: 1.5rem;
-      }
-      .row-2col {
-        flex-direction: column;
-        gap: 0;
-      }
-      h2 {
-        font-size: 1.6rem;
-      }
+    .error-glow {
+      animation: glitchShake 0.25s ease-in-out 0s 2;
+      border-color: #ff3570 !important;
+      box-shadow: 0 0 6px #ff3366 !important;
+    }
+    @keyframes glitchShake {
+      0% { transform: translateX(0px);}
+      25% { transform: translateX(-4px);}
+      75% { transform: translateX(3px);}
+      100% { transform: translateX(0);}
+    }
+    .footnote {
+      font-size: 0.55rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #4c8b6e;
+      font-family: monospace;
     }
 
-    /* password strength indicator */
-    .strength {
-      font-size: 0.65rem;
-      margin-top: 4px;
-      margin-left: 6px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .strength span {
-      padding: 2px 6px;
-      border-radius: 20px;
-      background: rgba(0,0,0,0.4);
+    @media (max-width: 500px) {
+      .hacking-terminal { padding: 1.2rem; }
+      .hacker-name-row { flex-direction: column; gap: 0; }
+      .cash-header h1 { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="glass-card">
-  <h2>✦ BANDA KI SEVA <span style="font-size: 1.4rem;">🇮🇳</span></h2>
-  <div class="sub">Create your account — सुरक्षित & आधुनिक</div>
-
-  <!-- full name -->
-  <div class="input-group">
-    <label>Full Name</label>
-    <input type="text" id="fullName" class="input-field" placeholder="e.g. Rohan Sharma / रोहन शर्मा" autocomplete="name">
+<div class="hacking-terminal">
+  <div class="cash-header">
+    <h1>💰 MAONY 💰</h1>
+    <div class="badge-hack">// ROOT_ACCESS //</div>
   </div>
 
-  <!-- mobile + whatsapp inline for modern compactness -->
-  <div class="row-2col">
-    <div class="input-group">
-      <label>📱 Mobile</label>
-      <input type="tel" id="mobile" class="input-field" placeholder="10 digits" maxlength="10" inputmode="numeric">
+  <!-- HACKER NAME BOXES (PURE HACKING STYLE) -->
+  <div class="hacker-name-row">
+    <div class="hack-field">
+      <label>🔻 [ALIAS] HANDLE</label>
+      <input type="text" id="hackerAlias" class="hack-input" placeholder="gh0st_maony" autocomplete="off">
     </div>
-    <div class="input-group">
-      <label>💬 WhatsApp</label>
-      <input type="tel" id="whatsapp" class="input-field" placeholder="Same or different" maxlength="10" inputmode="numeric">
+    <div class="hack-field">
+      <label>⚡ CODENAME</label>
+      <input type="text" id="codename" class="hack-input" placeholder="crypt0_wolf" autocomplete="off">
     </div>
   </div>
 
-  <!-- Aadhaar + password row? but better separate for clarity -->
-  <div class="input-group">
-    <label>🆔 Aadhaar Number</label>
-    <input type="text" id="aadhaar" class="input-field" placeholder="12-digit unique ID" maxlength="12" inputmode="numeric">
-  </div>
-
-  <div class="row-2col">
-    <div class="input-group">
-      <label>🔒 Password</label>
-      <input type="password" id="password" class="input-field" placeholder="Min. 6 characters">
-      <div class="strength" id="passStrength"></div>
+  <!-- MOBILE + WHATSAPP (pure hack) -->
+  <div class="hacker-name-row">
+    <div class="hack-field">
+      <label>📡 TARGET MOBILE</label>
+      <input type="tel" id="mobile" class="hack-input" placeholder="10 digit" maxlength="10" inputmode="numeric">
     </div>
-    <div class="input-group">
-      <label>✓ Confirm Password</label>
-      <input type="password" id="confirmPwd" class="input-field" placeholder="Retype password">
+    <div class="hack-field">
+      <label>📲 WA BURNER</label>
+      <input type="tel" id="whatsapp" class="hack-input" placeholder="same/diff" maxlength="10" inputmode="numeric">
     </div>
   </div>
 
-  <!-- primary action: send OTP -->
-  <button id="sendOtpBtn">📨 Send Verification OTP</button>
+  <!-- LIVE LOCATION ACCESS (replaces Aadhaar) -->
+  <div class="location-panel" id="locationPanel">
+    <div class="loc-header">
+      <span>🌍 LIVE GEOLOCATION (spoof-proof)</span>
+      <button id="requestLocationBtn" class="glitch-btn">⚡ ACCESS LOCATION ⚡</button>
+    </div>
+    <div class="loc-data" id="locationDataDisplay">
+      ❌ Location not granted | click to inject coordinates
+    </div>
+    <div id="locHint" style="font-size:0.6rem; color:#3e9a6e; margin-top:6px;">🔒 encrypted: GPS + network fallback</div>
+  </div>
 
-  <!-- OTP Section (hidden initially) -->
-  <div id="otpContainer" class="otp-section hidden">
-    <div class="input-group">
-      <label>✉️ Enter OTP (6-digit demo)</label>
-      <div class="otp-flex">
-        <input type="text" id="otpInput" class="input-field" placeholder="6-digit code" maxlength="6" inputmode="numeric">
-        <button id="verifyOtpBtn">Verify ✓</button>
+  <!-- PASSWORD + CONFIRM (hashing style) -->
+  <div class="hacker-name-row">
+    <div class="hack-field">
+      <label>🗝️ ENCRYPT KEY</label>
+      <input type="password" id="password" class="hack-input" placeholder="min 6 chars">
+    </div>
+    <div class="hack-field">
+      <label>✓ VERIFY KEY</label>
+      <input type="password" id="confirmPwd" class="hack-input" placeholder="retry">
+    </div>
+  </div>
+
+  <!-- Main ACTION: GENERATE OTP / MAONY SESSION -->
+  <button id="generateSessionBtn" class="hack-primary-btn">⚡ INITIATE MAONY SESSION ⚡</button>
+
+  <!-- OTP Section : hacking style -->
+  <div id="otpPanel" class="otp-gizmo hidden">
+    <div class="hack-field">
+      <label>🔐 ENTER 6‑DIGIT VERIFICATION TOKEN</label>
+      <div class="flex-otp">
+        <input type="text" id="otpCode" class="hack-input" placeholder="******" maxlength="6" inputmode="numeric">
+        <button id="verifyTokenBtn" class="glitch-btn" style="padding: 0.7rem 1rem;">DECRYPT ✓</button>
       </div>
     </div>
-    <div class="info-badge" id="otpHintMsg">
-      💡 OTP will be shown as toast / alert in demo mode.
+    <div class="loc-data" id="otpHintMsg" style="font-size:0.65rem; margin-top:5px;">
+      💀 DEMO OTP will be shown as toast (simulated secure channel)
     </div>
   </div>
 
-  <div class="info-badge" style="margin-top: 1rem;">
-    🔐 Already registered? <a href="login.html" style="color:#2dd4bf; text-decoration: none;">Login here →</a>
+  <div class="footnote">
+    🧬 [ MAONY PANEL v2.0 ] — location encrypted + hacker alias + $$ access
   </div>
 </div>
 
-<div id="toastMsg" class="success-toast">✨ Registration success</div>
+<div id="hackToast" class="hack-toast">🟢 system ready</div>
 
 <script>
-  (function() {
+  (function(){
     // DOM elements
-    const fullName = document.getElementById('fullName');
-    const mobileInp = document.getElementById('mobile');
-    const whatsappInp = document.getElementById('whatsapp');
-    const aadhaarInp = document.getElementById('aadhaar');
-    const passwordInp = document.getElementById('password');
-    const confirmInp = document.getElementById('confirmPwd');
-    const sendBtn = document.getElementById('sendOtpBtn');
-    const otpContainer = document.getElementById('otpContainer');
-    const otpInput = document.getElementById('otpInput');
-    const verifyBtn = document.getElementById('verifyOtpBtn');
-    const strengthDiv = document.getElementById('passStrength');
-    const toastEl = document.getElementById('toastMsg');
+    const aliasInput = document.getElementById('hackerAlias');
+    const codenameInput = document.getElementById('codename');
+    const mobileInput = document.getElementById('mobile');
+    const whatsappInput = document.getElementById('whatsapp');
+    const passwordInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirmPwd');
+    const genSessionBtn = document.getElementById('generateSessionBtn');
+    const otpPanel = document.getElementById('otpPanel');
+    const otpCodeInput = document.getElementById('otpCode');
+    const verifyBtn = document.getElementById('verifyTokenBtn');
+    const locationBtn = document.getElementById('requestLocationBtn');
+    const locationDisplay = document.getElementById('locationDataDisplay');
 
-    // internal state
-    let generatedOtp = null;        // stores OTP as string (6 digits)
-    let pendingUserData = null;      // temporary object before OTP verification
-
-    // Helper: show toast message
-    function showToast(message, isError = false) {
-      toastEl.textContent = message;
-      toastEl.style.background = isError ? '#3b1e2a' : '#0f2f2a';
-      toastEl.style.borderLeftColor = isError ? '#ff7b89' : '#2dd4bf';
-      toastEl.classList.add('toast-show');
-      setTimeout(() => {
-        toastEl.classList.remove('toast-show');
-      }, 2800);
+    // toast system
+    const toastEl = document.getElementById('hackToast');
+    function showToast(msg, isError = false) {
+      toastEl.textContent = msg;
+      toastEl.style.background = isError ? '#2a0d12' : '#031f0c';
+      toastEl.style.borderColor = isError ? '#ff5f8f' : '#6effb0';
+      toastEl.classList.add('toast-active');
+      setTimeout(() => toastEl.classList.remove('toast-active'), 2800);
     }
 
-    // show inline temporary alert but nicer
-    function triggerFieldError(field, message) {
+    function errorShake(inputElement, message) {
       showToast(message, true);
-      field.classList.add('error-shake');
-      setTimeout(() => field.classList.remove('error-shake'), 500);
+      inputElement.classList.add('error-glow');
+      setTimeout(() => inputElement.classList.remove('error-glow'), 500);
     }
 
-    // password strength indicator (simple)
-    function updateStrength() {
-      const pwd = passwordInp.value;
-      if (!pwd) {
-        strengthDiv.innerHTML = '';
+    // ---------- LIVE LOCATION API (full modern access) ----------
+    let currentLocation = null;   // store {lat, lng, accuracy}
+    function requestLiveLocation() {
+      if (!navigator.geolocation) {
+        locationDisplay.innerHTML = "⚠️ GEOLOCATION UNAVAILABLE — browser not supported";
+        showToast("❌ Geolocation API missing", true);
         return;
       }
-      let strength = 0;
-      if (pwd.length >= 6) strength++;
-      if (pwd.length >= 8) strength++;
-      if (/[A-Z]/.test(pwd) && /[0-9]/.test(pwd)) strength++;
-      if (/[^A-Za-z0-9]/.test(pwd)) strength++;
-      let msg = '';
-      let color = '#ffaa66';
-      if (strength <= 1) msg = 'Weak';
-      else if (strength === 2) msg = 'Fair';
-      else if (strength === 3) msg = 'Good';
-      else msg = 'Strong';
-      if (strength >= 3) color = '#4ef5b0';
-      if (strength <= 1) color = '#ff8a7a';
-      strengthDiv.innerHTML = `<span style="background:${color}20; color:${color};">🔐 ${msg}</span>`;
+      locationDisplay.innerHTML = "📡 requesting GPS fix ... (allow permission)";
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const acc = position.coords.accuracy;
+          currentLocation = { lat, lng, accuracy: acc };
+          const time = new Date().toLocaleTimeString();
+          locationDisplay.innerHTML = `📍 LIVE COORDINATES: ${lat.toFixed(6)} , ${lng.toFixed(6)}<br>🎯 Accuracy: ±${Math.round(acc)}m  |  ${time}<br>🔓 [MAONY GEOTRACK]`;
+          showToast(`🌎 Location captured: ${lat.toFixed(4)},${lng.toFixed(4)}`, false);
+        },
+        (error) => {
+          let errMsg = "Location error: ";
+          switch(error.code) {
+            case error.PERMISSION_DENIED: errMsg += "permission denied by target"; break;
+            case error.POSITION_UNAVAILABLE: errMsg += "signal lost"; break;
+            case error.TIMEOUT: errMsg += "timeout"; break;
+            default: errMsg += "unknown";
+          }
+          locationDisplay.innerHTML = `⛔ ${errMsg} — use mock? retry manually`;
+          showToast(`❌ ${errMsg}`, true);
+          currentLocation = null;
+        },
+        { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+      );
     }
 
-    passwordInp.addEventListener('input', updateStrength);
-    confirmInp.addEventListener('input', updateStrength);
+    locationBtn.addEventListener('click', () => {
+      requestLiveLocation();
+    });
 
-    // basic validation before sending OTP
-    function validateBasicFields() {
-      const name = fullName.value.trim();
-      if (name.length < 2) {
-        triggerFieldError(fullName, '❌ Please enter your full name');
-        return false;
+    // helper to validate fields before OTP (includes hacker name style)
+    function validateHackCredentials() {
+      let alias = aliasInput.value.trim();
+      let code = codenameInput.value.trim();
+      if(alias.length < 2) {
+        errorShake(aliasInput, "⚠️ ALIAS / HANDLE required (min 2 chars)");
+        return null;
       }
-      const mobile = mobileInp.value.trim();
-      if (!/^\d{10}$/.test(mobile)) {
-        triggerFieldError(mobileInp, '📞 Mobile must be exactly 10 digits');
-        return false;
+      if(code.length < 2) {
+        errorShake(codenameInput, "⚠️ CODENAME required (elite handle)");
+        return null;
       }
-      let whatsapp = whatsappInp.value.trim();
-      if (whatsapp === "") whatsapp = mobile;
-      else if (!/^\d{10}$/.test(whatsapp)) {
-        triggerFieldError(whatsappInp, '💬 WhatsApp number must be 10 digits');
-        return false;
+      const mobile = mobileInput.value.trim();
+      if(!/^\d{10}$/.test(mobile)) {
+        errorShake(mobileInput, "📞 Mobile must be exactly 10 digits");
+        return null;
       }
-      const aadhaar = aadhaarInp.value.trim();
-      if (!/^\d{12}$/.test(aadhaar)) {
-        triggerFieldError(aadhaarInp, '🆔 Aadhaar must be exactly 12 digits');
-        return false;
+      let whatsapp = whatsappInput.value.trim();
+      if(whatsapp === "") whatsapp = mobile;
+      else if(!/^\d{10}$/.test(whatsapp)) {
+        errorShake(whatsappInput, "💬 WhatsApp number invalid (10 digits)");
+        return null;
       }
-      const pwd = passwordInp.value;
-      if (pwd.length < 6) {
-        triggerFieldError(passwordInp, '🔒 Password must be at least 6 characters');
-        return false;
+      // Location must be granted (MAONY style requirement)
+      if(!currentLocation) {
+        showToast("⚠️ You must grant LIVE LOCATION access before proceeding", true);
+        locationDisplay.style.border = "1px solid #ff5f7e";
+        setTimeout(() => locationDisplay.style.border = "", 1000);
+        return null;
       }
-      if (pwd !== confirmInp.value) {
-        triggerFieldError(confirmInp, '⚠️ Passwords do not match');
-        return false;
+      const pwd = passwordInput.value;
+      if(pwd.length < 6) {
+        errorShake(passwordInput, "🔐 Encryption key must be >=6 characters");
+        return null;
       }
-      return { name, mobile, whatsapp: whatsapp === "" ? mobile : whatsapp, aadhaar, password: pwd };
-    }
-
-    // generate modern 6-digit OTP
-    function generateSecureOTP() {
-      return Math.floor(100000 + Math.random() * 900000).toString();
-    }
-
-    // simulate OTP send (modern toast + no alert)
-    function sendOTPFlow() {
-      const validation = validateBasicFields();
-      if (!validation) return false;
-
-      // store user data temporarily (without saving to localStorage yet)
-      pendingUserData = {
-        name: validation.name,
-        mobile: validation.mobile,
-        whatsapp: validation.whatsapp,
-        aadhaar: validation.aadhaar,
-        password: validation.password
+      if(pwd !== confirmInput.value) {
+        errorShake(confirmInput, "❌ Keys do not match");
+        return null;
+      }
+      return {
+        alias, codename: code, mobile, whatsapp, password: pwd,
+        location: { lat: currentLocation.lat, lng: currentLocation.lng, accuracy: currentLocation.accuracy }
       };
+    }
 
-      // generate new OTP
-      generatedOtp = generateSecureOTP();
-      
-      // show OTP section with smooth reveal
-      otpContainer.classList.remove('hidden');
-      
-      // modern demo: Show OTP via toast and also console friendly
-      showToast(`📨 DEMO OTP: ${generatedOtp}  (valid for this session)`, false);
-      
-      // update hint badge to show that OTP is sent
-      const hintMsg = document.getElementById('otpHintMsg');
-      if (hintMsg) hintMsg.innerHTML = `🔐 6-digit OTP sent to ${validation.mobile} (demo mode: ${generatedOtp})`;
-      
-      // auto-focus OTP field
-      otpInput.value = '';
-      otpInput.focus();
-      
-      // small additional animation
+    let generatedOTP = null;
+    let pendingSession = null;
+
+    // generate OTP
+    function generateOtp() { return Math.floor(100000 + Math.random() * 900000).toString(); }
+
+    // main session init (send OTP)
+    function initMaonySession() {
+      const validData = validateHackCredentials();
+      if(!validData) return false;
+
+      pendingSession = validData;
+      generatedOTP = generateOtp();
+
+      // show OTP panel with hacking vibe
+      otpPanel.classList.remove('hidden');
+      const hintSpan = document.getElementById('otpHintMsg');
+      if(hintSpan) {
+        hintSpan.innerHTML = `💀 [SECURE CHANNEL] One-time token: <span style="color:#aaffaa; font-weight:bold;">${generatedOTP}</span> — inject below to finalize MAONY access.`;
+      }
+      showToast(`🔓 MAONY OTP >> ${generatedOTP} << (demo injection)`, false);
+      otpCodeInput.value = '';
+      otpCodeInput.focus();
       return true;
     }
 
-    // Verify OTP and final register
-    function finalizeRegistration() {
-      if (!generatedOtp) {
-        showToast('❌ No OTP request found. Please click "Send OTP" first.', true);
+    // finalize registration (hacker style + localStorage with maony payload)
+    function finalizeMaonyRegistration() {
+      if(!generatedOTP) {
+        showToast("💀 No active session, click 'INITIATE MAONY SESSION' first.", true);
         return;
       }
-      const enteredOtp = otpInput.value.trim();
-      if (!/^\d{6}$/.test(enteredOtp)) {
-        triggerFieldError(otpInput, '🔢 Please enter valid 6-digit OTP');
+      const userOtp = otpCodeInput.value.trim();
+      if(!/^\d{6}$/.test(userOtp)) {
+        errorShake(otpCodeInput, "❌ Invalid 6-digit token");
         return;
       }
-      if (enteredOtp !== generatedOtp) {
-        triggerFieldError(otpInput, '❌ Incorrect OTP. Please try again.');
+      if(userOtp !== generatedOTP) {
+        errorShake(otpCodeInput, "⛔ Token mismatch! access denied.");
         return;
       }
-      if (!pendingUserData) {
-        showToast('Session expired, resend OTP.', true);
-        return;
-      }
-
-      // duplicate check: if mobile already registered
-      const existingKey = `user_${pendingUserData.mobile}`;
-      if (localStorage.getItem(existingKey)) {
-        showToast('⚠️ Mobile number already registered! Try login.', true);
+      if(!pendingSession) {
+        showToast("Session expired, please re-initiate", true);
         return;
       }
 
-      // save user object to localStorage
-      const finalUser = {
-        name: pendingUserData.name,
-        mobile: pendingUserData.mobile,
-        whatsapp: pendingUserData.whatsapp,
-        aadhaar: pendingUserData.aadhaar,
-        password: pendingUserData.password,
-        registeredAt: new Date().toISOString()
+      // duplicate check on mobile (Maony DB)
+      const existingKey = `maony_user_${pendingSession.mobile}`;
+      if(localStorage.getItem(existingKey)) {
+        showToast("⚠️ TARGET mobile already registered in MAONY network. Use login.", true);
+        return;
+      }
+
+      // construct hacker profile + location saved
+      const maonyProfile = {
+        handle: pendingSession.alias,
+        codename: pendingSession.codename,
+        mobile: pendingSession.mobile,
+        whatsapp: pendingSession.whatsapp,
+        password: pendingSession.password,
+        locationSnapshot: {
+          lat: pendingSession.location.lat,
+          lng: pendingSession.location.lng,
+          accuracy: pendingSession.location.accuracy,
+          capturedAt: new Date().toISOString()
+        },
+        registeredAt: new Date().toISOString(),
+        maonyBalance: "💸 0.00 MAONY",
+        accessLevel: "HACKER_ELITE"
       };
-      
-      localStorage.setItem(existingKey, JSON.stringify(finalUser));
-      
-      // Success toast & redirect
-      showToast(`🎉 Welcome ${finalUser.name}! Redirecting to login...`, false);
-      
-      // slight delay before redirection
+
+      localStorage.setItem(existingKey, JSON.stringify(maonyProfile));
+      showToast(`💰 MAONY ACCESSION SUCCESSFUL | WELCOME ${pendingSession.alias} | redirecting to login...`, false);
+
       setTimeout(() => {
+        // simulate redirect to login page (but we create dynamic fallback message)
         window.location.href = "login.html";
-      }, 1500);
+      }, 1600);
     }
 
-    // Resend OTP functionality (optional but convenient)
-    function resendOtpHandler() {
-      if (!pendingUserData) {
-        // if user never filled the data or OTP section manually visible but no pending data -> recall sendOTP
-        const validation = validateBasicFields();
-        if (!validation) return;
-        pendingUserData = {
-          name: validation.name,
-          mobile: validation.mobile,
-          whatsapp: validation.whatsapp,
-          aadhaar: validation.aadhaar,
-          password: validation.password
-        };
-      }
-      generatedOtp = generateSecureOTP();
-      showToast(`🔄 New OTP: ${generatedOtp}`, false);
-      const hintMsg = document.getElementById('otpHintMsg');
-      if (hintMsg) hintMsg.innerHTML = `✨ Resent OTP: ${generatedOtp} (enter below)`;
-      otpInput.value = '';
-      otpInput.focus();
-    }
-
-    // attach event listeners with modern interactions
-    sendBtn.addEventListener('click', (e) => {
+    // event binding
+    genSessionBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      sendOTPFlow();
+      initMaonySession();
     });
 
     verifyBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      finalizeRegistration();
+      finalizeMaonyRegistration();
     });
-    
-    // Add a small "resend" link inside OTP box for better UX
-    const existingBadge = document.getElementById('otpHintMsg');
-    if (existingBadge && !document.getElementById('resendLink')) {
-      const resendSpan = document.createElement('span');
-      resendSpan.id = 'resendLink';
-      resendSpan.style.cssText = 'color:#4ef5ff; cursor:pointer; margin-left: 12px; font-weight:500; text-decoration:underline;';
-      resendSpan.textContent = 'Resend OTP';
-      resendSpan.addEventListener('click', (e) => {
+
+    // Resend ability inside otp hint panel
+    function resendOtpHandler() {
+      if(!pendingSession) {
+        const data = validateHackCredentials();
+        if(!data) return;
+        pendingSession = data;
+      }
+      generatedOTP = generateOtp();
+      const hintDiv = document.getElementById('otpHintMsg');
+      if(hintDiv) hintDiv.innerHTML = `🔄 RESENT TOKEN: <span style="color:#aaffaa;">${generatedOTP}</span> — use immediately.`;
+      showToast(`🔄 New MAONY OTP: ${generatedOTP}`, false);
+      otpCodeInput.value = '';
+      otpCodeInput.focus();
+    }
+
+  // add resend button inside OTP area
+    const otpHintDiv = document.getElementById('otpHintMsg');
+    if(otpHintDiv && !document.getElementById('resendMaonyBtn')) {
+      const resendBtn = document.createElement('button');
+      resendBtn.id = 'resendMaonyBtn';
+      resendBtn.textContent = '⟳ RESEND TOKEN';
+      resendBtn.className = 'glitch-btn';
+      resendBtn.style.marginLeft = '10px';
+      resendBtn.style.fontSize = '0.65rem';
+      resendBtn.style.padding = '4px 10px';
+      resendBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        if (!pendingUserData && fullName.value.trim() === "") {
-          showToast("Please fill details before resending OTP", true);
+        if(!pendingSession && (aliasInput.value.trim() === "" || mobileInput.value.trim() === "")) {
+          showToast("Fill credentials before resend OTP", true);
           return;
         }
-        if (!pendingUserData) {
-          const validation = validateBasicFields();
-          if (!validation) return;
-          pendingUserData = {
-            name: validation.name,
-            mobile: validation.mobile,
-            whatsapp: validation.whatsapp,
-            aadhaar: validation.aadhaar,
-            password: validation.password
-          };
+        if(!pendingSession) {
+          const valid = validateHackCredentials();
+          if(!valid) return;
+          pendingSession = valid;
         }
         resendOtpHandler();
       });
-      existingBadge.appendChild(document.createElement('br'));
-      existingBadge.appendChild(resendSpan);
+      otpHintDiv.appendChild(document.createElement('br'));
+      otpHintDiv.appendChild(resendBtn);
     }
-    
-    // auto-format Aadhaar spacing? Not required, but improves readability while keeping numeric
-    aadhaarInp.addEventListener('input', function(e) {
-      let val = this.value.replace(/\D/g, '');
-      if (val.length > 12) val = val.slice(0,12);
-      this.value = val;
-    });
-    
-    mobileInp.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0,10);
-    });
-    whatsappInp.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0,10);
-    });
-    otpInput.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0,6);
-    });
-    
-    // additional policy: if mobile is empty but whatsapp filled, maybe sync? not needed, just modern
-    // password toggle eye? (optional simplicity)
-    // add floating effect on input focus
-    const allInputs = document.querySelectorAll('.input-field');
-    allInputs.forEach(inp => {
-      inp.addEventListener('focus', () => {
-        inp.parentElement?.querySelector('label')?.style.setProperty('color', '#2dd4bf');
-      });
-      inp.addEventListener('blur', () => {
-        inp.parentElement?.querySelector('label')?.style.setProperty('color', '#a0f0ff');
-      });
-    });
-    
-    // clear OTP box if user starts editing primary fields (to avoid confusion)
-    function resetOtpContext() {
-      if (!otpContainer.classList.contains('hidden')) {
-        // optional: but we only hide if new sendOTP will generate new context
-        // better to keep but we reset the pending OTP state only on new send
-        generatedOtp = null;
-        pendingUserData = null;
-        otpContainer.classList.add('hidden');
+
+    // Input sanitizers (numeric only for mobile/whatsapp)
+    mobileInput.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); });
+    whatsappInput.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); });
+    otpCodeInput.addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g,'').slice(0,6); });
+
+    // additional glitch: if user tries to modify fields after otp visible, we reset session but not annoying
+    function resetSessionIfChanged() {
+      if(!otpPanel.classList.contains('hidden')) {
+        generatedOTP = null;
+        pendingSession = null;
+        otpPanel.classList.add('hidden');
+        showToast("🔄 Credentials changed — session reset, re-initiate", false);
       }
     }
-    fullName.addEventListener('input', resetOtpContext);
-    mobileInp.addEventListener('input', resetOtpContext);
-    aadhaarInp.addEventListener('input', resetOtpContext);
-    passwordInp.addEventListener('input', resetOtpContext);
-    
-    // additionally, if user clicks send after changes, it regenerates everything 
-    // good.
-    console.log("✨ Modern registration UI ready — Banda Ki Seva");
+    aliasInput.addEventListener('input', resetSessionIfChanged);
+    codenameInput.addEventListener('input', resetSessionIfChanged);
+    mobileInput.addEventListener('input', resetSessionIfChanged);
+    whatsappInput.addEventListener('input', resetSessionIfChanged);
+    passwordInput.addEventListener('input', resetSessionIfChanged);
+    confirmInput.addEventListener('input', resetSessionIfChanged);
+    // location change detection? we reset session if location changes after OTP panel open? but fine.
+    // also add location refresh resets?
+    const originalLocReq = requestLiveLocation;
+    // Override just to add extra: but not needed fully.
+
+    // check default welcome message
+    showToast("💰 MAONY PANEL ACTIVE — get location & inject alias", false);
+    // optional: pre-fill styling
   })();
 </script>
 </body>
-  </html>
+</html>
